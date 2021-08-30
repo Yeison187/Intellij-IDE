@@ -12,25 +12,25 @@ public class main {
         nombre = entradaTeclado.nextLine();
 
         while (nombre.length() < 3 || !isValidName(nombre)) {
-            System.out.println("Digite un nombre valido: ");
+            System.out.print("Digite un nombre valido: ");
             nombre = entradaTeclado.nextLine();
         }
 
-        System.out.println("Digite su celular: ");
+        System.out.print("Digite su celular: ");
         celular = entradaTeclado.nextLine();
 
         while (!isNumeric(removeSpace(celular)) || removeSpace(celular).length() != 10) {
 
-            System.out.println("Numero no valido, digite nuevamente su celular: ");
+            System.out.print("Numero no valido, digite nuevamente su celular: ");
             celular = entradaTeclado.nextLine();
         }
 
-        System.out.println("Digite su edad: ");
+        System.out.print("Digite su edad: ");
         edad = entradaTeclado.nextLine();
 
         while (!isNumeric(removeSpace(edad)) || !validAge(removeSpace(edad))) {
 
-            System.out.println("Edad no valida, digite nuevamente su edad: ");
+            System.out.print("Edad no valida, digite nuevamente su edad: ");
             edad = entradaTeclado.nextLine();
         }
 
@@ -54,9 +54,13 @@ public class main {
 
     private static boolean validAge(String cadena) {
 
-        if (Integer.parseInt(cadena) >= 18 && Integer.parseInt(cadena) < 80) {
+        if (Integer.parseInt(cadena) >= 18 && Integer.parseInt(cadena) <= 80) {
+
             return true;
+
         } else {
+            
+            System.out.println("Recuerda que buscamos personas entre 18 y 80 años");
             return false;
         }
 
