@@ -11,7 +11,7 @@ public class main {
         System.out.print("Digite su nombre: ");
         nombre = entradaTeclado.nextLine();
 
-        while (nombre.length() < 3 ){
+        while (nombre.length() < 3 || !isValidName(nombre)) {
             System.out.println("Digite un nombre valido: ");
             nombre = entradaTeclado.nextLine();
         }
@@ -19,7 +19,7 @@ public class main {
         System.out.println("Digite su celular: ");
         celular = entradaTeclado.nextLine();
 
-        while (!isNumeric(celular.replace(" ","")) || celular.replace(" ","").length() != 10) {
+        while (!isNumeric(removeSpace(celular)) || removeSpace(celular).length() != 10) {
 
             System.out.println("Numero no valido, digite nuevamente su celular: ");
             celular = entradaTeclado.nextLine();
@@ -28,7 +28,7 @@ public class main {
         System.out.println("Digite su edad: ");
         edad = entradaTeclado.nextLine();
 
-        while (!isNumeric(edad.replace(" ","")) || !validAge(edad.replace(" ",""))) {
+        while (!isNumeric(removeSpace(edad)) || !validAge(removeSpace(edad))) {
 
             System.out.println("Edad no valida, digite nuevamente su edad: ");
             edad = entradaTeclado.nextLine();
@@ -36,10 +36,11 @@ public class main {
 
 
         System.out.println("Bienvenido señor " + nombre + ", es un placer para nosotros contar con una persona de "
-                + edad.replace(" ","") + " años.\n" + "\n" +
-                "Próximamente nos comunicaremos con usted al numero " + celular + " .\n" +
+                + removeSpace(edad) + " años.\n" + "\n" +
+                "Próximamente nos comunicaremos con usted al numero " + removeSpace(celular) + " .\n" +
                 "\n" +
                 "Feliz día");
+
     }
 
     private static boolean isNumeric(String cadena) {
@@ -53,12 +54,27 @@ public class main {
 
     private static boolean validAge(String cadena) {
 
-            if (Integer.parseInt(cadena) >= 18 && Integer.parseInt(cadena) < 80){
-                return true;
-            } else {
+        if (Integer.parseInt(cadena) >= 18 && Integer.parseInt(cadena) < 80) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    private static String removeSpace(String cadena) {
+        return cadena.replace(" ", "");
+    }
+
+    private static boolean isValidName(String cadena) {
+        char caracter;
+        for (int i = 0; i < cadena.length(); i++) {
+            caracter = cadena.charAt(i);
+            if (!((caracter >= 'a' && caracter <= 'z') || (caracter >= 'A' && caracter <= 'Z') || caracter == ' ')) {
                 return false;
             }
-
+        }
+        return true;
     }
 
 
